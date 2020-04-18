@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visitingcard/model/MyCard.dart';
 import 'package:visitingcard/service/CardService.dart';
 
 class ListCards extends StatefulWidget {
@@ -8,6 +9,26 @@ class ListCards extends StatefulWidget {
 
 class _ListCardsState extends State<ListCards> {
   CardService cardService = new CardService();
+  List<MyCard> all = new List<MyCard>();
+
+
+  @override
+  void initState() {
+    super.initState();
+  print("init state called -----------");
+
+    loadData();
+  }
+
+  void loadData(){
+
+      cardService.getAll().then(
+              (list) =>
+                  setState(() { all.addAll(list); })
+          );
+
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -35,16 +56,18 @@ class _ListCardsState extends State<ListCards> {
           itemBuilder: (BuildContext context, int index) => Container(
             height: 50,
             color: Colors.green[200],
-            child: const Center(child: Text('Entry A')),
+            child: Center(child: Text(all[index].name)),
           ),
           separatorBuilder: (BuildContext context, int index) {
             return Divider(
               color: Colors.white,
             );
           },
-          itemCount: 20,
+          itemCount: all.length,
         ),
       ),
     );
   }
+
+
 }

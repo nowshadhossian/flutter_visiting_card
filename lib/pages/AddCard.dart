@@ -78,6 +78,7 @@ class _AddCardState extends State<AddCard> {
                         );
 
                         cardService.insertCard(myCard);
+                        Navigator.pushNamed(context, "/listCards");
                       },
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       color: Colors.green[300],
