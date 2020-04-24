@@ -15,17 +15,39 @@ class _ListCardsState extends State<ListCards> {
   @override
   void initState() {
     super.initState();
-  print("init state called -----------");
-
+    print("init state called -----------");
     loadData();
   }
 
   void loadData(){
-
       cardService.getAll().then(
-              (list) =>
-                  setState(() { all.addAll(list); })
+              (list) =>setState(() { all.addAll(list); })
           );
+  }
+
+  Widget cardLayout(MyCard myCard){
+    return Card(
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            leading: Image.asset('assets/images/card.png', fit: BoxFit.fill,),
+            title: Center(child: Text(myCard.organization, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),)),
+            subtitle: Column(
+              children: <Widget>[
+                Row(children: <Widget>[
+                  Text("Name: ", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),),
+                  Text(myCard.name )
+                ],),
+                Row(children: <Widget>[
+                  Text("Phone: ", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),),
+                  Text( myCard.phone),
+                ],),
+              ],
+          ),
+          ),
+        ],
+      ),
+    );
 
   }
 
@@ -54,9 +76,9 @@ class _ListCardsState extends State<ListCards> {
           padding: const EdgeInsets.all(20),
           // ignore: missing_return
           itemBuilder: (BuildContext context, int index) => Container(
-            height: 50,
+            /*height: 50,*/
             color: Colors.green[200],
-            child: Center(child: Text(all[index].name)),
+            child: cardLayout(all[index]),
           ),
           separatorBuilder: (BuildContext context, int index) {
             return Divider(

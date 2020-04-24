@@ -14,7 +14,7 @@ class CardService {
               '${card.organization}, ${card.phone}, ${card.note} )');*/
       await txn.rawInsert(
           'INSERT INTO card(name, organization, phone, note) VALUES( "${card.name}", '
-              ' "sdff", "sssa", "dwdw" )');
+              ' "${card.organization}", "${card.phone}", "${card.note}" )');
         //await database.close();
     }));
 
