@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:visitingcard/model/MyCard.dart';
 import 'package:visitingcard/service/CardService.dart';
 
@@ -26,6 +27,30 @@ class _ListCardsState extends State<ListCards> {
   }
 
   Widget cardLayout(MyCard myCard){
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.25,
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          caption: 'Edit',
+          color: Colors.indigo,
+          icon: Icons.edit,
+          onTap: () => print('Edit'),
+        ),
+        IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red,
+          icon: Icons.archive,
+          onTap: () => print('Delete'),
+        ),
+      ],
+      child: GestureDetector(
+          onTap: () => print("Clicked"),
+          child: theCard(myCard))
+    );
+  }
+
+  Widget theCard(MyCard myCard){
     return Card(
       child: Column(
         children: <Widget>[
@@ -43,12 +68,11 @@ class _ListCardsState extends State<ListCards> {
                   Text( myCard.phone),
                 ],),
               ],
-          ),
+            ),
           ),
         ],
       ),
     );
-
   }
 
   @override
