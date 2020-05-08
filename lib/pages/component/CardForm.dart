@@ -9,11 +9,17 @@ class CardForm extends StatelessWidget {
 
 
   final Function(MyCard) saveAction;
-  MyCard editMyCard;
+  MyCard myCard;
 
   CardForm(this.saveAction);
 
-  CardForm.withMyCard(this.editMyCard, this.saveAction);
+  CardForm.withMyCard(MyCard editMyCard,  this.saveAction){
+    this.myCard = editMyCard;
+    nameController.text = editMyCard.name;
+    phoneController.text = editMyCard.phone;
+    organizationController.text = editMyCard.organization;
+    noteController.text = editMyCard.note;
+  }
 
   @override
   void initState() {
@@ -23,13 +29,6 @@ class CardForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("Buid called cardForm");
-    if(editMyCard != null){
-      print(editMyCard.name + " here is the name");
-      nameController.text = editMyCard.name;
-      phoneController.text = editMyCard.phone;
-      organizationController.text = editMyCard.organization;
-      noteController.text = editMyCard.note;
-    }
     return Column(
       children: <Widget>[
         Text(
@@ -75,11 +74,11 @@ class CardForm extends StatelessWidget {
             RaisedButton(
              // onPressed: {},//saveAction(editMyCard),
               onPressed: () {
-                editMyCard.name = nameController.text;
-                editMyCard.organization = organizationController.text;
-                editMyCard.phone = phoneController.text;
-                editMyCard.note = noteController.text;
-                saveAction(editMyCard);
+                  myCard.name = nameController.text;
+                  myCard.organization = organizationController.text;
+                  myCard.phone = phoneController.text;
+                  myCard.note = noteController.text;
+                  saveAction(myCard);
                 },
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               color: Colors.green[300],
