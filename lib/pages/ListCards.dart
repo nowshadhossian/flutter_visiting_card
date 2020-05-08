@@ -16,7 +16,6 @@ class _ListCardsState extends State<ListCards> {
   @override
   void initState() {
     super.initState();
-    print("init state called -----------");
     loadData();
   }
 
@@ -35,7 +34,9 @@ class _ListCardsState extends State<ListCards> {
           caption: 'Edit',
           color: Colors.indigo,
           icon: Icons.edit,
-          onTap: () => print('Edit'),
+          onTap: () => {
+            Navigator.pushNamed(context, "/editCard", arguments: myCard)
+          },
         ),
         IconSlideAction(
           caption: 'Delete',
@@ -78,7 +79,6 @@ class _ListCardsState extends State<ListCards> {
   @override
   Widget build(BuildContext context) {
 
-    print(cardService.getAll().then((list) => print("the name: " + list[list.length -1].name)));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,

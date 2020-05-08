@@ -13,6 +13,16 @@ class MyCard {
         : fromMap(list.single);
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'phone': phone,
+      'organization': organization,
+      'note': note,
+    };
+  }
+
   static MyCard fromMap(Map map) {
     return MyCard(
       id: map['id'],
