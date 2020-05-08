@@ -42,7 +42,12 @@ class _ListCardsState extends State<ListCards> {
           caption: 'Delete',
           color: Colors.red,
           icon: Icons.archive,
-          onTap: () => print('Delete'),
+          onTap: () => {
+            setState(() {
+              all.remove(myCard);
+              cardService.deleteCard(myCard);
+            }),
+          },
         ),
       ],
       child: GestureDetector(

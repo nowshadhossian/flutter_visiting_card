@@ -44,10 +44,8 @@ class CardService {
     return MyCard.multiple(results);
   }
 
-/*deleteCard(MyCard card) async {
-    Database database = DatabaseUtils.instance().getDatabase();
-    await database
-        .rawDelete('DELETE FROM card WHERE id = ?', [card.id]);
-    await database.close();
-  }*/
+  Future<void> deleteCard(MyCard card) async {
+    Future<Database>  database = DatabaseUtils.instance().getDatabase();
+    await database.then((db) => db.rawDelete('DELETE FROM card WHERE id = ?', [card.id]));
+  }
 }

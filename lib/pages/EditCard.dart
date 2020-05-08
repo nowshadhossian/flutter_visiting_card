@@ -17,7 +17,7 @@ class _EditCardState extends State<EditCard> {
         .of(context)
         .settings
         .arguments;
-    print(myCard.name + " I am the name");
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
